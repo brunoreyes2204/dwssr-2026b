@@ -1,22 +1,25 @@
 //funcion para manejar errores
-  //❌var createError = require('http-errors'); <---forma vieja
 import createError from 'http-errors'
 //Importar el framework express
-  //❌var express = require('express'); <---forma vieja
 import express from 'express'
 //Importa modulos para manejar rutas
-  //❌var path = require('path');  <---forma vieja
 import path from 'node:path'
 //Importa modulos para manejar cookies
-  //❌var cookieParser = require('cookie-parser'); <---forma vieja
 import cookieParser from 'cookie-parser'
 //Importa modulos para manejar logs
-  //❌var logger = require('morgan'); <---forma vieja
 import logger from 'morgan'
+  //Import para crear Dirname
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
+//Creando las variables
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 //Importar las rutas de la aplicación
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+  //var indexRouter = require('./routes/index'); <---forma vieja
+import indexRouter from './routes/index.js'
+  //var usersRouter = require('./routes/users'); <---forma vieja
+import usersRouter from './routes/users.js'
 
 //Crear la aplicación express
 var app = express();
@@ -55,4 +58,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+//module.exports = app;
+export default app;

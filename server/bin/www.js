@@ -5,7 +5,7 @@
  */
 
 //var app = require('../app'); <-- esta es la version vieja
-import app from '../app'
+import app from '../app.js'
 
 //importando Debug
 import createDebug from "debug"
