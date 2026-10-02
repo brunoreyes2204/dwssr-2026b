@@ -21,10 +21,8 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 //Importar las rutas de la aplicación
-  //var indexRouter = require('./routes/index'); <---forma vieja
-import indexRouter from './routes/index.js'
-  //var usersRouter = require('./routes/users'); <---forma vieja
-import usersRouter from './routes/users.js'
+import indexRouter from '#routes/index.js';
+import usersRouter from '#routes/users.js';
 
 //Crear la aplicación express
 debug("🔨 Creando backend") //🐧
