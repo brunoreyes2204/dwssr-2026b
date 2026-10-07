@@ -3,6 +3,14 @@ import { defineConfig } from 'vite'
 //Importando un admoin de rutas
 import {resolve} from 'node:path'
 
+//Import para crear Dirname
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
+
+//Creando las variables
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 export default defineConfig({
     //directorio raiz de los archivos fuente del front end
     root: 'src', 

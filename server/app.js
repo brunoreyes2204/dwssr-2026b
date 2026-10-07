@@ -10,9 +10,11 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 //Importando biblioteca de debug
 import createDebug from "debug" //🐧
-  //Import para crear Dirname
+//Import para crear Dirname
 import { fileURLToPath } from 'node:url'
 import { dirname } from 'node:path'
+//importando el template de engine Handlebars
+import hbs from 'hbs';
 
 //Creacion del objeto debug
 const debug = createDebug('dwssr-2026b:server') //🐧
@@ -23,6 +25,8 @@ const __dirname = dirname(__filename)
 //Importar las rutas de la aplicación
 import indexRouter from '#routes/index.js';
 import usersRouter from '#routes/users.js';
+//importando el registrador del helper 
+import { registerViteAssetsHelper } from '#lib/vite.js';
 
 //Crear la aplicación express
 debug("🔨 Creando backend") //🐧
@@ -31,12 +35,20 @@ var app = express();
 // Configurar el motor de vistas 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+//Registro helper
+registerViteHelper(hbs);
+
 
 // Configurar middlewares de la aplicación
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//SArchivos estaticos para produccion
+if (process.env.NODE_ENV === 'production') {
+app.use(express.static(path.join(__dirname,'..', 'dist')));
+}
 
 //Configurar la carpeta de archivos estáticos
 debug("🔨 Creando servidor de archivos estáticos") //🐧
