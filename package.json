@@ -1,16 +1,15 @@
 {
-  "name": "dwssr-2026b",
+  "name": "desarrollo-de-aplicaciones-ssr-2026b",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node ./server/bin/www.js",
-    "dev": "DEBUG=dwssr-2026b:* nodemon ./server/bin/www.js",
+    "start": " NODE_ENV=production node ./server/bin/www.js",
+    "dev": "DEBUG=desarrollo-de-aplicaciones-ssr-2026b:* nodemon ./server/bin/www.js",
     "dev:vite": "vite",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:vite\"",
     "build": "vite build",
-    "preview": "npm run build && npm start",
-    "greet": "echo 'Hola mundo' "
+    "preview": "npm run build && npm start"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,6 +20,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "concurrently": "^10.0.5",
     "nodemon": "^3.1.14",
     "vite": "^8.3.2"
   },

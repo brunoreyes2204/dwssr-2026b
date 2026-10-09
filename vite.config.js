@@ -1,43 +1,39 @@
-//Importando configuradot de vite
-import { defineConfig } from 'vite'
-//Importando un admoin de rutas
-import {resolve} from 'node:path'
-
-//Import para crear Dirname
-import { fileURLToPath } from 'node:url'
-import { dirname } from 'node:path'
-
-//Creando las variables
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+//Importando configurador de Vite
+import {defineConfig} from 'vite';
+//Importando un admin de rutas 
+import {resolve} from 'node:path';
+//Imports para crear dirname
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+//Creando las variables de ruta 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineConfig({
-    //directorio raiz de los archivos fuente del front end
-    root: 'src', 
-    //configurando un servidor de desarrollo 
+    //Directorio raíz de los archivos fuente del frontend
+    root: 'src',
+    //Configurando un servidor de desarrollo 
     server: {
+        //Puerto de escucha
         port: 5173,
         //Rigidez del puerto
-        strict: true
-  
+        strict: true,
     },
-
-    // Configurando el build
-    build: {
-        //Directorio de salida del java script para produccion
-        outDir: "../dist",
-        //Asegurando limpieza del folder de produccion
+    //Configurando el Build 
+    build:{
+        //Directorio de salida del js para producción
+        outDir: '../dist',
+        //Asegurando limpieza del folder de producción 
         emptyOutDir: true,
-        //Generando manifiesto para el servidor 
+        //Generar manifiesto para el servidor
         manifest: true,
-        //opciones de em paquetado
+        //Opciones de Empaquetado
         rollupOptions: {
-            input: {
+            input:{
                 main: resolve(__dirname, 'src/main.js')
             }
-            //Configuraciones adicionales de Rollup si es necesario
         }
     },
-      //Configuracion para el desarrollo
-      publicDir: false
+    //Configuración para el desarrollo
+    publicDir: false
 })

@@ -1,5 +1,5 @@
-//Importando estilos de la pagina
+//Importando los estilos de la página 
 import './styles/main.css'
 
 //Imprimiendo en consola 
-console.log("🎉 VITE ⚡+ EXPRESS 🚂 Working!!")
+console.log("🎉VITE ⚡+ EXPRESS 🚂 Working!!")
