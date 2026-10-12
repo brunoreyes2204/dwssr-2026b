@@ -4,17 +4,14 @@
  * Module dependencies.
  */
 
-//var app = require('../app'); <-- esta es la version vieja
-import app from '../app.js'
+import app from  '../app.js';
+//Importando Debug
+import createDebug from 'debug';
 
-//importando Debug
-import createDebug from "debug"
-//var debug = require('debug')('dwssr-2026b:server');
-import http from 'node:http'
-//var http = require('http');
-
+import http from 'node:http';
 //Creación del objeto Debug
-const debug = createDebug('dwssr-2026b:server')
+const debug = createDebug('desarrollo-de-aplicaciones-ssr-2026b:server');
+
 
 /**
  * Get port from environment and store in Express.
@@ -65,24 +62,23 @@ function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-
   const bind = typeof port === 'string'
-    ? `Pipe ${port}` // 'Pipe' + port
-    : `Port ${port}` // 'Port' + port
+    ? `Pipe ${port}`
+    : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges` );
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(` ${bind} is already in use`);
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
-        throw error;
-    }
+      throw error;
+  }
 }
 
 /**
@@ -92,7 +88,7 @@ function onError(error) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string'
-    ? `Pipe ${addr}`
-    : `Port ${addr.port}`;
-  debug(`💻Listening on ${bind}`);
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug('💻 Listening on ${bind}');
 }
