@@ -29,7 +29,7 @@ if (isDev) {
 } 
 //En producción leemos el manifest
 //Y generamos las etiquetas finales de producción
-const manifestPath = path.join(__dirname, '..', '..','dist', 'vite','manifest.json')
+const manifestPath = path.join(__dirname, '..', '..','dist', '.vite','manifest.json')
 
 
 
