@@ -1,39 +1,42 @@
-//Importando configurador de Vite
-import {defineConfig} from 'vite';
-//Importando un admin de rutas 
-import {resolve} from 'node:path';
-//Imports para crear dirname
+// Configurador de Vite
+import { defineConfig } from 'vite';
+
+// Utilidades para rutas
+import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
-//Creando las variables de ruta 
+//importando tailwindcss
+import tailwindcss from '@tailwindcss/vite'
+
+
+// Directorio del archivo de configuración
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-    //Directorio raíz de los archivos fuente del frontend
+    // Directorio de los archivos del frontend
     root: 'src',
-    //Configurando un servidor de desarrollo 
+    //agregando a vite el plugin de tailwindcss
+    plugins: [ tailwindcss()],
+
+    // Servidor de desarrollo
     server: {
-        //Puerto de escucha
         port: 5173,
-        //Rigidez del puerto
-        strict: true,
+        strictPort: true,
     },
-    //Configurando el Build 
-    build:{
-        //Directorio de salida del js para producción
+
+    // Configuración para producción
+    build: {
         outDir: '../dist',
-        //Asegurando limpieza del folder de producción 
         emptyOutDir: true,
-        //Generar manifiesto para el servidor
         manifest: true,
-        //Opciones de Empaquetado
+
         rollupOptions: {
-            input:{
-                main: resolve(__dirname, 'src/main.js')
-            }
-        }
+            input: {
+                main: resolve(__dirname, 'src/main.js'),
+            },
+        },
     },
-    //Configuración para el desarrollo
-    publicDir: false
-})
+
+    // Desactivar el directorio de archivos públicos
+    publicDir: false,
+});
