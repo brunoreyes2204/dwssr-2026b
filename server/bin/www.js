@@ -4,14 +4,13 @@
  * Module dependencies.
  */
 
-import app from  '../app.js';
-//Importando Debug
-import createDebug from 'debug';
+import app from '../app.js'
+//importando Debug
+import createDebug from "debug"
+import http from 'node:http'
 
-import http from 'node:http';
-//Creación del objeto Debug
-const debug = createDebug('desarrollo-de-aplicaciones-ssr-2026b:server');
-
+//creacion del objeto Debug
+const debug = createDebug('dwssr-2026b:server')
 
 /**
  * Get port from environment and store in Express.
@@ -62,9 +61,10 @@ function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
+
   const bind = typeof port === 'string'
-    ? `Pipe ${port}`
-    : `Port ${port}`;
+    ? `Pipe ${port}` //'Pipe ' + port
+    : `Port ${port}` //'Port ' + port 
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -90,5 +90,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
     : `port ${addr.port}`;
-  debug('💻 Listening on ${bind}');
+  debug(`💻 Listening on ${bind}`);
 }
