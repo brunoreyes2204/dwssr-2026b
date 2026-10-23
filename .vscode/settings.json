@@ -1,9 +1,17 @@
 {
-  "editor.fontSize": 14,
-  "editor.tabSize": 4,
+  // Tamaño de la fuente del editor (px)
+  "editor.fontSize": 25,
+
+  // Tamaño de la fuente de la terminal integrada (px)
+  "terminal.integrated.fontSize": 20,
+
+  // Tamaño de la indentación (espacios)
+  "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "terminal.integrated.fontSize": 14,
-  "editor.codeActionsOnSave":{
-    "source.fixAll.eslint":"always"
-  }
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": true
 }
+ 
