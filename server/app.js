@@ -3,25 +3,30 @@ import createError from 'http-errors';
 //Importar el framework Express
 import express from 'express';
 //Importa módulos para manejar rutas
-import path from 'node:path';
+import path, { dirname } from 'node:path';
 //Importar módulos para manejar cookis
 import cookieParser from 'cookie-parser';
 //Importar módulos para manejar logs
 import logger from 'morgan';
 //Importando biblioteca de debug 👍
 import createDebug from 'debug';
+
 //Se importan las rutas de la aplicación 
 //var indexRouter = require('./routes/index');
+
+// eslint-disable-next-line import-x/no-rename-default
 import indexRouter from '#routes/index.js';
+
 //var usersRouter = require('./routes/users');
+// eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
+
 //Importando el registrador de helper
-import {registerViteHelper} from './lib/vite.js'
 //Imports para crear dirname 
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
 //Importando el template engine handlebars 
 import hbs from 'hbs'
+import {registerViteHelper} from './lib/vite.js'
 //Creando la variable
 //Creación del objeto debug 👍
 const debug=createDebug('desarrollo-de-aplicaciones-ssr-2026b:app');
@@ -31,7 +36,7 @@ const __dirname = dirname(__filename);
 
 //Se crea la aplicación Express
 debug("🔨Creando backend");
-var app = express();
+const app = express();
 
 // Configuración de la vista del motor de plantillas
 app.set('views', path.join(__dirname, 'views'));
@@ -45,7 +50,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //Archivos estáticos para producción
-if(process.env.NODE_ENV == 'production') {
+if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'dist')));
 }
 //Configuración de la carpeta pública para servir archivos estáticos
@@ -57,13 +62,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
 
-app.use(function(err, req, res, _next) {
+app.use((err, req, res, _next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

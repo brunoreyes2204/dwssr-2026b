@@ -17,9 +17,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "dependencies": {

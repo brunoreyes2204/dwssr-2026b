@@ -1,9 +1,14 @@
 //Biblioteca dile stream
 import fs from 'node:fs'
 //Biblioteca de rutas
-import path from 'node:path'
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
+import { dirname, path } from 'node:path';
+//importando Debug
+import createDebug from "debug"
+
+//creacion del objeto Debug
+const debug = createDebug('dwssr-2026b:server')
+
 //Creando variables de rutas
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,7 +42,7 @@ const manifestPath = path.join(__dirname, '..', '..','dist', '.vite','manifest.j
 
 //Si no existe el manifest
 if (!fs.existsSync(manifestPath)) {
-    console.warn("Vite manifest not found. Run 'npm run build'");
+    debug("Vite manifest not found. Run 'npm run build'");
     return ''
 }
 //Leyendo y parseando a JSON el archivo de manifiesto que 
@@ -48,7 +53,7 @@ const manifest= JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
 const mainEntry = manifest['main.js']
 //Guarda el main.js
 if(!mainEntry){
-  console.warn('Archivo main.js no está disponible en el manifiesto de Vite')
+  debug('Archivo main.js no está disponible en el manifiesto de Vite')
   return ''
 }
 
@@ -70,8 +75,8 @@ return tags;
 Función registradora del helper de Handlebars 
 */ 
 export function registerViteHelper(hbs){
-  hbs.registerHelper('viteAssets', ()=>{
+  hbs.registerHelper('viteAssets', ()=>
     //Sanitizando la salida del helper
-    return new hbs.SafeString(viteAssets());
-  });
+     new hbs.SafeString(viteAssets())
+  );
 }
