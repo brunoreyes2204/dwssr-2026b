@@ -7,7 +7,7 @@ import path, { dirname } from 'node:path';
 //Importar módulos para manejar cookis
 import cookieParser from 'cookie-parser';
 //Importar módulos para manejar logs
-import logger from 'morgan';
+import morgan from 'morgan';
 //Importando biblioteca de debug 👍
 import createDebug from 'debug';
 
@@ -45,7 +45,7 @@ app.set('view engine', 'hbs');
 registerViteHelper(hbs);
 
 //Configuración de middlewares para manejar solicitudes HTTP
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
