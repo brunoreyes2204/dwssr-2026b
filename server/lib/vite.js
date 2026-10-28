@@ -2,7 +2,7 @@
 import fs from 'node:fs'
 //Biblioteca de rutas
 import { fileURLToPath } from 'node:url';
-import { dirname, path } from 'node:path';
+import { dirname, join } from 'node:path';
 //importando Debug
 import createDebug from "debug"
 
@@ -34,7 +34,7 @@ if (isDev) {
 } 
 //En producción leemos el manifest
 //Y generamos las etiquetas finales de producción
-const manifestPath = path.join(__dirname, '..', '..','dist', '.vite','manifest.json')
+const manifestPath = join(__dirname, '..', '..','dist', '.vite','manifest.json')
 
 
 
