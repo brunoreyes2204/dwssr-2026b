@@ -10,24 +10,22 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 //Importando biblioteca de debug 👍
 import createDebug from 'debug';
-
-//Se importan las rutas de la aplicación 
-//var indexRouter = require('./routes/index');
-
-// eslint-disable-next-line import-x/no-rename-default
-import indexRouter from '#routes/index.js';
-
-//var usersRouter = require('./routes/users');
-// eslint-disable-next-line import-x/no-rename-default
-import usersRouter from '#routes/users.js';
-
-//Importando el registrador de helper
 //Imports para crear dirname 
 import { fileURLToPath } from 'node:url';
 //Importando el template engine handlebars 
 import hbs from 'hbs'
+
+
+//Se importan las rutas de la aplicación 
+// eslint-disable-next-line import-x/no-rename-default
+import indexRouter from '#routes/index.js';
+// eslint-disable-next-line import-x/no-rename-default
+import usersRouter from '#routes/users.js';
+//Importando el registrador de helper
 import {registerViteHelper} from './lib/vite.js'
-//Creando la variable
+//Importando la configuracion de Winston logger
+import logger from './lib/winston.js';
+
 //Creación del objeto debug 👍
 const debug=createDebug('desarrollo-de-aplicaciones-ssr-2026b:app');
 //Creando variables de rutas
@@ -45,10 +43,17 @@ app.set('view engine', 'hbs');
 registerViteHelper(hbs);
 
 //Configuración de middlewares para manejar solicitudes HTTP
-app.use(morgan('dev'));
+app.use(
+  morgan('dev',{
+    stream : {
+      write:(msg)=>logger.info(msg.trim())
+     }
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 //Archivos estáticos para producción
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'dist')));
