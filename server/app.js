@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 //Importar módulos para manejar logs
 import morgan from 'morgan';
 //Importando biblioteca de debug 👍
-import createDebug from 'debug';
+  //import createDebug from 'debug';
 //Imports para crear dirname 
 import { fileURLToPath } from 'node:url';
 //Importando el template engine handlebars 
@@ -27,7 +27,7 @@ import {registerViteHelper} from './lib/vite.js'
 import logger from './lib/winston.js';
 
 //Creación del objeto debug 👍
-const debug=createDebug('desarrollo-de-aplicaciones-ssr-2026b:app');
+  //const debug=createDebug('desarrollo-de-aplicaciones-ssr-2026b:app');
 //Creando variables de rutas
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
