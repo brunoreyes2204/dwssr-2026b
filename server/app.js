@@ -17,7 +17,7 @@ import hbs from 'hbs'
 
 
 //Se importan las rutas de la aplicación 
-// eslint-disable-next-line import-x/no-rename-default
+ 
 import indexRouter from '#routes/index.js';
 // eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
@@ -33,7 +33,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //Se crea la aplicación Express
-debug("🔨Creando backend");
+//debug('🔨Creando backend');
+logger.info("🔨Creando backend")
 const app = express();
 
 // Configuración de la vista del motor de plantillas
@@ -59,10 +60,13 @@ if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'dist')));
 }
 //Configuración de la carpeta pública para servir archivos estáticos
-debug("🔨 Creando servidor de archivos estáticos");
+//debug("🔨 Creando servidor de archivos estáticos");
+logger.info('🔨 Creando servidor de archivos estáticos');
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
 //Registramos las rutas de la aplicación
-debug("🛣️Registrando rutas");
+//debug("🛣️Registrando rutas");
+logger.info('🛣️Registrando rutas')
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
