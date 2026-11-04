@@ -8,12 +8,8 @@ import path, { dirname } from 'node:path';
 import cookieParser from 'cookie-parser';
 //Importar módulos para manejar logs
 import morgan from 'morgan';
-//Importando biblioteca de debug 👍
-  //import createDebug from 'debug';
 //Imports para crear dirname 
 import { fileURLToPath } from 'node:url';
-//Importando el template engine handlebars 
-import hbs from 'hbs'
 
 
 //Se importan las rutas de la aplicación 
@@ -21,27 +17,22 @@ import hbs from 'hbs'
 import indexRouter from '#routes/index.js';
 // eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
-//Importando el registrador de helper
-import {registerViteHelper} from './lib/vite.js'
+//importando la función de configuración de hbs
+import configureHandlebars from './lib/handlebars.js';
 //Importando la configuracion de Winston logger
 import logger from './lib/winston.js';
 
-//Creación del objeto debug 👍
-  //const debug=createDebug('desarrollo-de-aplicaciones-ssr-2026b:app');
+
 //Creando variables de rutas
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //Se crea la aplicación Express
-//debug('🔨Creando backend');
 logger.info("🔨Creando backend")
 const app = express();
 
-// Configuración de la vista del motor de plantillas
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-//Registro helper
-registerViteHelper(hbs);
+// Configurar el motor de vistas con hbs
+configureHandlebars(app)
 
 //Configuración de middlewares para manejar solicitudes HTTP
 app.use(
@@ -60,12 +51,10 @@ if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'dist')));
 }
 //Configuración de la carpeta pública para servir archivos estáticos
-//debug("🔨 Creando servidor de archivos estáticos");
 logger.info('🔨 Creando servidor de archivos estáticos');
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 //Registramos las rutas de la aplicación
-//debug("🛣️Registrando rutas");
 logger.info('🛣️Registrando rutas')
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -86,15 +75,6 @@ app.use((err, req, res, _next) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-//Ejemplo de código inalcanzable
-//(()=>{
-//  let age = 10;
-//  return age
-//  if (age == 10){
-//    console.log("Codigo")
-//  }
-// })
 
 //module.exports = app;
 export default app;
